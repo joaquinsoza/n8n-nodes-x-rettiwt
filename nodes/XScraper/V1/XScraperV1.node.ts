@@ -288,7 +288,7 @@ export class XScraperV1 implements INodeType {
 
 						timeline.list = timeline.list.slice(0, limit);
 
-						responseData = timeline;
+						responseData = { items: timeline.list, nextCursor: timeline.next };
 					}
 				}
 
