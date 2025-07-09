@@ -278,7 +278,9 @@ export class XScraperV1 implements INodeType {
 							throw new NodeOperationError(this.getNode(), 'User not found');
 						}
 
-						responseData = await rettiwt.user.timeline(userData.id, limit);
+						const timeline = await rettiwt.user.timeline(userData.id, limit);
+
+						responseData = timeline.list;
 					}
 				}
 
