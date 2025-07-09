@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-x-rettiwt",
-  "version": "0.4.4",
+  "version": "0.5.0",
   "description": "Uses Rettiwt API",
   "keywords": [
     "n8n-community-node-package"
@@ -38,7 +38,9 @@
       "dist/credentials/XCredentialsApi.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/XScraper/XScraper.node.js"
+      "dist/nodes/XScraper/XScraper.node.js",
+      "dist/nodes/XScraper/XScraperTrigger.node.js",
+      "dist/nodes/XScraper/XScraperStreamTrigger.node.js"
     ]
   },
   "dependencies": {
