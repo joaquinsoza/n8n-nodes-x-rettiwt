@@ -271,6 +271,7 @@ export class XScraperV1 implements INodeType {
 						) as INodeParameterResourceLocator;
 
 						const limit = this.getNodeParameter('limit', i);
+						const cursor = this.getNodeParameter('cursor', i);
 
 						const userData = await rettiwt.user.details(username.value as string);
 
@@ -278,9 +279,16 @@ export class XScraperV1 implements INodeType {
 							throw new NodeOperationError(this.getNode(), 'User not found');
 						}
 
-						const timeline = await rettiwt.user.timeline(userData.id, limit);
+						const timeline = await rettiwt.user.timeline(userData.id, limit, cursor ? cursor.toString() : undefined);
 
-						responseData = timeline.list;
+						// Sort timeline in descending order (newer to older)
+						timeline.list = timeline.list.sort((a, b) => {
+							return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+						});
+
+						timeline.list = timeline.list.slice(0, limit);
+
+						responseData = timeline;
 					}
 				}
 

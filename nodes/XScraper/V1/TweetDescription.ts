@@ -369,6 +369,13 @@ export const tweetFields: INodeProperties[] = [
 		},
 	},
 	{
+		displayName: 'Cursor',
+		name: 'cursor',
+		type: 'string',
+		default: '',
+		description: 'Cursor to start from',
+	},
+	{
 		displayName: 'Options',
 		name: 'additionalFields',
 		type: 'collection',
