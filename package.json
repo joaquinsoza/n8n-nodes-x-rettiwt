@@ -1,6 +1,6 @@
 {
   "name": "n8n-nodes-x-rettiwt",
-  "version": "0.4.3",
+  "version": "0.4.4",
   "description": "Uses Rettiwt API",
   "keywords": [
     "n8n-community-node-package"
