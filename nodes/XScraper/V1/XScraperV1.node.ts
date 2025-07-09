@@ -292,10 +292,25 @@ export class XScraperV1 implements INodeType {
 					}
 				}
 
-				const executionData = this.helpers.constructExecutionMetaData(
-					this.helpers.returnJsonArray(responseData as unknown as IDataObject[]),
-					{ itemData: { item: i } },
-				);
+				// Handle different response types appropriately
+				let executionData;
+				
+				if (
+					(resource === 'user' && (operation === 'getUser' || operation === 'getTimeline')) ||
+					(resource === 'tweet' && (operation === 'create' || operation === 'uploadMedia' || operation === 'delete' || operation === 'retweet' || operation === 'unretweet' || operation === 'like' || operation === 'unlike'))
+				) {
+					// For single object responses, wrap in json object
+					executionData = this.helpers.constructExecutionMetaData(
+						[{ json: responseData as IDataObject }],
+						{ itemData: { item: i } },
+					);
+				} else {
+					// For array responses (like search), use returnJsonArray
+					executionData = this.helpers.constructExecutionMetaData(
+						this.helpers.returnJsonArray(responseData as unknown as IDataObject[]),
+						{ itemData: { item: i } },
+					);
+				}
 
 				returnData.push(...executionData);
 
